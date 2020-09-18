@@ -3,6 +3,7 @@ import './App.css';
 import PokemonCardContainer from '../src/components/PokemonCardContainer/PokemonCardContainer';
 // import InfoCardContainer from '../src/components/InfoCardContainer/InfoCardContainer'
 //import PokemonCard from '../src/components/PokemonCard/PokemonCard';
+//import PokemonType from '../src/components/PokemonType/PokemonType';
 
 function App() {
     return (

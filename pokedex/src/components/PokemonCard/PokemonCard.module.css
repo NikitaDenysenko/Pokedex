@@ -35,3 +35,8 @@
 	margin: 15px 0 7px;
 	letter-spacing: 1px;
 }
+
+.pokemon .types{
+	display: flex;
+	justify-content: space-between;
+}

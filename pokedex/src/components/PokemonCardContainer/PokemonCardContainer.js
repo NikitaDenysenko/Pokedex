@@ -22,18 +22,27 @@ class PokemonCardContainer extends Component {
         const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
         const res = await fetch(url);
         const pokemon = await res.json();
+        const pokemonTypes = pokemon.types.map((types) => types.type.name);
+        //console.log(pokemon);
         const pokeData = {
             name: pokemon.name[0].toUpperCase() + pokemon.name.slice(1),
             pokeId: pokemon.id.toString().padStart(3, '0'),
-            pictureLink: `https://pokeres.bastionbot.org/images/pokemon/${pokemon.id}.png`
-        }
-        this.setState({pokemonData: [...this.state.pokemonData, pokeData] })
+            pokePicture: `https://pokeres.bastionbot.org/images/pokemon/${pokemon.id}.png`,
+            pokeTypes: pokemonTypes
+        };
+        this.setState({ pokemonData: [...this.state.pokemonData, pokeData] });
     };
 
     render() {
-
         const pokemons = this.state.pokemonData.map((poke) => {
-            return <PokemonCard  pokemonName={poke.name}  pokemonId={poke.pokeId} pokemonImage={poke.pictureLink}/>;
+            return (
+                <PokemonCard
+                    pokemonName={poke.name}
+                    pokemonId={poke.pokeId}
+                    pokemonImage={poke.pokePicture}
+                    pokemonTypes={poke.pokeTypes}
+                />
+            );
         });
         return <div className={classes.pokeContainer}>{pokemons}</div>;
     }
