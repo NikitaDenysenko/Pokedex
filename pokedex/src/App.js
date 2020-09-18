@@ -7,7 +7,7 @@ import PokemonCardContainer from '../src/components/PokemonCardContainer/Pokemon
 function App() {
     return (
         <Fragment>
-            <h1>Pokedex</h1>
+            {/* <h1>Pokedex</h1> */}
             <PokemonCardContainer />
         </Fragment>
     );

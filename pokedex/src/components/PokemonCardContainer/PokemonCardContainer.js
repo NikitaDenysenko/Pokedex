@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 import PokemonCard from '../PokemonCard/PokemonCard';
-//import classes from './PokemonCardContainer.module.css'
+import classes from './PokemonCardContainer.module.css';
 
 class PokemonCardContainer extends Component {
     state = {
@@ -10,59 +9,33 @@ class PokemonCardContainer extends Component {
     };
 
     componentDidMount() {
-        axios.get('https://pokeapi.co/api/v2/pokemon?limit=24').then((res) => {
-            this.setState({ pokemonData: res.data.results });
-            console.log(res.data.results);
-        });
+        this.fetchPokemons();
     }
 
-    // fetchPokemons = async () => {
-    //     for (let i = 1; i <= 150; i++) {
-    //         await this.getPokemon(i);
-    //     }
-    // };
+    fetchPokemons = async () => {
+        for (let i = 1; i <= 12; i++) {
+            await this.getPokemon(i);
+        }
+    };
 
-    // getPokemon = async (id) => {
-    //     const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-    //     const res = await fetch(url);
-    //     const pokemon = await res.json();
-    //     // console.log(pokemon);
-    //     // const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
-    //     // const pokeId = pokemon.id;
-    //     // const pictureLink = `https://pokeres.bastionbot.org/images/pokemon/${pokeId}.png`
-    //     //this.setState({pokemonName: name, pokemonId: pokeId, pokemonImage: pictureLink})
-    //     console.log(pokemon)
-    // };
+    getPokemon = async (id) => {
+        const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+        const res = await fetch(url);
+        const pokemon = await res.json();
+        const pokeData = {
+            name: pokemon.name[0].toUpperCase() + pokemon.name.slice(1),
+            pokeId: pokemon.id.toString().padStart(3, '0'),
+            pictureLink: `https://pokeres.bastionbot.org/images/pokemon/${pokemon.id}.png`
+        }
+        this.setState({pokemonData: [...this.state.pokemonData, pokeData] })
+    };
 
     render() {
+
         const pokemons = this.state.pokemonData.map((poke) => {
-            return <PokemonCard pokemonId={poke.id} pokemonName={poke.name}/>
+            return <PokemonCard  pokemonName={poke.name}  pokemonId={poke.pokeId} pokemonImage={poke.pictureLink}/>;
         });
-
-        console.log(this.state.pokemonData)
-
-        // const name = this.state.pokemonData.name[0].toUpperCase() + this.state.pokemonData.name.slice(1);
-        // const pokeId = this.state.pokemonData.id;
-        // const pictureLink = `https://pokeres.bastionbot.org/images/pokemon/${pokeId}.png`;
-
-        // pokemons = (
-        //     <div>
-        //         {this.state.pokemonData.map(pokemon => {
-        //             return <PokemonCard
-        //                 pokemonName={name}
-        //                 pokemonId={pokeId}
-        //                 pokemonImage={pictureLink}
-        //             />
-        //         })}
-        //     </div>
-        // )
-
-        return (
-            <div>
-                <h2>PokemonCardContainer</h2>
-                {pokemons}
-            </div>
-        );
+        return <div className={classes.pokeContainer}>{pokemons}</div>;
     }
 }
 

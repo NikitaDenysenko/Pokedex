@@ -5,11 +5,12 @@ import classes from './PokemonCard.module.css';
 class PokemonCard extends Component {
 
     render() {
+        
         return (
             <div className={classes.pokemon}>
-                {/* <div className={classes.imgContainer}>
+                <div className={classes.imgContainer}>
                     <img src={this.props.pokemonImage} alt=""/>
-                </div> */}
+                </div>
                 <div className={classes.info}>
                     <span className={classes.number}>
                         #{this.props.pokemonId}
