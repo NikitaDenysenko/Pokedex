@@ -1,7 +1,26 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+}
+
 .pokeContainer {
 	display: flex;
 	flex-wrap: wrap;
-	/* justify-content: center; */
-	/* margin: 0 auto; */
-	max-width: 60%;
+	width: 60%;
+}
+
+.infoContainer {
+	max-width: 40%;
+}
+
+.loadMoreButton {
+	background-color: #eee;
+	border-radius: 20px;
+	margin: 10px;
+	padding: 20px;
+	text-align: center;
+	width: 93%;
+	background-color: rgb(68, 126, 192);
+	border: none;
+	outline: none;
 }

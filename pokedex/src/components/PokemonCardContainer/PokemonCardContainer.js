@@ -9,17 +9,20 @@ class PokemonCardContainer extends Component {
     state = {
         pokemonData: [],
         selectedPokemonId: null,
-        pokemonStats: null
+        pokemonStats: null,
+        startIndex: 1,
+        endIndex: 12,
     };
 
     componentDidMount() {
-        this.fetchPokemons();
+        this.fetchPokemons(this.state.startIndex, this.state.endIndex);
     }
 
-    fetchPokemons = async () => {
-        for (let i = 1; i <= 12; i++) {
+    fetchPokemons = async (start, end) => {
+        for (let i = start; i <= end; i++) {
             await this.getPokemon(i);
         }
+        this.setState({ startIndex: start, endIndex: end });
     };
 
     getPokemon = async (id) => {
@@ -38,30 +41,9 @@ class PokemonCardContainer extends Component {
         this.setState({ pokemonData: [...this.state.pokemonData, pokeData] });
     };
 
-    // getStats = async (id) => {
-    //     const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-    //     const res = await fetch(url);
-    //     const pokemon = await res.json();
-    //     const pokemonTypes = pokemon.types.map((types) => types.type.name);
-    //     const pokeStats = {
-    //         pokeId: pokemon.id,
-    //         type: pokemonTypes,
-    //         attack: pokemon.stats[1].base_stat,
-    //         defence: pokemon.stats[2].base_stat,
-    //         hp: pokemon.stats[0].base_stat,
-    //         spAttack: pokemon.stats[3].base_stat,
-    //         spDefence: pokemon.stats[4].base_stat,
-    //         speed: pokemon.stats[5].base_stat,
-    //         weight: pokemon.weight,
-    //         moves: pokemon.moves.length,
-    //     };
-    //     console.log(pokeStats);
-    //     return pokeStats;
-    // };
-
     pokeSelectedHandler = (id) => {
-        this.setState({selectedPokemonId: id})
-    }
+        this.setState({ selectedPokemonId: id });
+    };
 
     render() {
         //console.log(this.state.pokemonData)
@@ -78,12 +60,24 @@ class PokemonCardContainer extends Component {
             );
         });
         return (
-            <div className={classes.pokeContainer}>
-                {pokemons}
-                <InfoCard id={this.state.selectedPokemonId} stats={this.state.pokemonStats}/>
+            <div className={classes.container}>
+                <div className={classes.pokeContainer}>
+                    {pokemons}
+                    <button className={classes.loadMoreButton}
+                        onClick={() =>
+                            this.fetchPokemons(this.state.startIndex + 12, this.state.endIndex + 12)
+                        }>
+                        Load More
+                    </button>
+                </div>
+                <InfoCard
+                    className={classes.infoContainer}
+                    id={this.state.selectedPokemonId}
+                    stats={this.state.pokemonStats}
+                />
             </div>
         );
     }
 }
-
+// <InfoCard id={this.state.selectedPokemonId} stats={this.state.pokemonStats}/>
 export default PokemonCardContainer;
