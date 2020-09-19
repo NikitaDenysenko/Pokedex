@@ -6,12 +6,11 @@ import classes from './PokemonCard.module.css';
 class PokemonCard extends Component {
     
     render() {
-        //console.log(this.props.pokemonTypes)
         const pokemonTypes = this.props.pokemonTypes.map((type) => {
             return <PokemonType type={type} />
         }) 
         return (
-            <div className={classes.pokemon}>
+            <div className={classes.pokemon} onClick={this.props.clicked}>
                 <div className={classes.imgContainer}>
                     <img src={this.props.pokemonImage} alt=""/>
                 </div>
