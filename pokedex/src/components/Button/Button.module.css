@@ -1,19 +1,4 @@
-.container {
-	display: flex;
-	justify-content: space-between;
-}
-
-.pokeContainer {
-	display: flex;
-	flex-wrap: wrap;
-	width: 60%;
-}
-
-.infoContainer {
-	max-width: 40%;
-}
-
-/* .loadMoreButton {
+.loadMoreButton {
 	background-color: #eee;
 	border-radius: 20px;
 	margin: 10px;
@@ -28,4 +13,4 @@
 
 .loadMoreButton:active {
 	background-color: blue;
-} */
+}

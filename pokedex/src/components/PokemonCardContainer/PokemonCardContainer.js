@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import PokemonCard from '../PokemonCard/PokemonCard';
 import InfoCard from '../InfoCard/InfoCard';
+import Button from '../Button/Button';
 
 import classes from './PokemonCardContainer.module.css';
 
@@ -36,7 +37,6 @@ class PokemonCardContainer extends Component {
             pokePicture: `https://pokeres.bastionbot.org/images/pokemon/${pokemon.id}.png`,
             pokeTypes: pokemonTypes,
         };
-        //.toString().padStart(3, '0')
 
         this.setState({ pokemonData: [...this.state.pokemonData, pokeData] });
     };
@@ -54,7 +54,6 @@ class PokemonCardContainer extends Component {
                     pokemonId={poke.pokeId}
                     pokemonImage={poke.pokePicture}
                     pokemonTypes={poke.pokeTypes}
-                    onClick={this.printHello}
                     clicked={() => this.pokeSelectedHandler(poke.pokeId)}
                 />
             );
@@ -63,12 +62,11 @@ class PokemonCardContainer extends Component {
             <div className={classes.container}>
                 <div className={classes.pokeContainer}>
                     {pokemons}
-                    <button className={classes.loadMoreButton}
-                        onClick={() =>
+                    <Button 
+                        clicked={() =>
                             this.fetchPokemons(this.state.startIndex + 12, this.state.endIndex + 12)
                         }>
-                        Load More
-                    </button>
+                    </Button>
                 </div>
                 <InfoCard
                     className={classes.infoContainer}

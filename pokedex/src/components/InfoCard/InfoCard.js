@@ -25,7 +25,8 @@ class InfoCard extends Component {
         const pokemonTypes = pokemon.types.map((types) => types.type.name);
         const pokeStats = {
             pokeId: pokemon.id,
-            type: pokemonTypes,
+            pokeIdHashtag: pokemon.id.toString().padStart(3, '0'),
+            types: pokemonTypes.join(','),
             attack: pokemon.stats[1].base_stat,
             defence: pokemon.stats[2].base_stat,
             hp: pokemon.stats[0].base_stat,
@@ -34,6 +35,7 @@ class InfoCard extends Component {
             speed: pokemon.stats[5].base_stat,
             weight: pokemon.weight,
             moves: pokemon.moves.length,
+            name: pokemon.name[0].toUpperCase() + pokemon.name.slice(1),
         };
         const pokePicture = `https://pokeres.bastionbot.org/images/pokemon/${pokemon.id}.png`;
         console.log(pokeStats);
@@ -52,7 +54,12 @@ class InfoCard extends Component {
                         <div className={classes.imgContainer}>
                             <img src={this.state.pokemonPicture} alt='' />
                         </div>
-                        <table>
+                        <h2>{this.state.loadedPokemon.name} #{this.state.loadedPokemon.pokeIdHashtag}</h2>
+                        <table style={{margin: 'auto'}}>
+                            <tr>
+                                <th>Types</th>
+                                <td>{this.state.loadedPokemon.types}</td>
+                            </tr>
                             <tr>
                                 <th>Attack</th>
                                 <td>{this.state.loadedPokemon.attack}</td>
