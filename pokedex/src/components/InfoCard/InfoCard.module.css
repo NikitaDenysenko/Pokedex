@@ -1,7 +1,5 @@
 .infoContainer {
 	display: flex;
-	flex-wrap: wrap;
-	position: sticky;
 }
 
 .infoCard {
@@ -25,6 +23,14 @@
 }
 
 .imgContainer img {
-	margin-top: 20px;
+	margin-top: 10px;
 	max-width: 90%;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table, th, td {
+	border: 1px solid black
 }

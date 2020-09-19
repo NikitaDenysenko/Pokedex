@@ -1,4 +1,4 @@
-.loadMoreButton {
+.LoadMoreButton {
 	background-color: #eee;
 	border-radius: 20px;
 	margin: 10px;
@@ -11,6 +11,6 @@
 	cursor: pointer;
 }
 
-.loadMoreButton:active {
+.LoadMoreButton:active {
 	background-color: blue;
 }
